@@ -16,13 +16,13 @@ public class TextThread extends Thread{
     public void run(){
         if(this.runButton.getText().equalsIgnoreCase("start")){
             this.runButton.setText("STOP");
-            this.firstField.setText("Press stop ...");
-            this.secondField.setText("to stop.");
+            this.firstField.setText("Press ...");
+            this.secondField.setText("to end.");
         }
         else if(this.runButton.getText().equalsIgnoreCase("stop")){
             this.runButton.setText("START");
-            this.firstField.setText("Press start ...");
-            this.secondField.setText("to start.");
+            this.firstField.setText("Press ...");
+            this.secondField.setText("to begin.");
         }
     }
     

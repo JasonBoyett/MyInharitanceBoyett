@@ -4,23 +4,26 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import ovalButton.OvalButton;
+
 public class MyFrame extends JFrame{
     
     JPanel panel = new JPanel();
     GridLayout grid = new GridLayout(5,4);
-    JButton runButton = new JButton("START");
+    JButton runButton = new OvalButton();
     int tickOffset = 10;
     JTextField spacer = new JTextField();
     JTextField spacer2 = new JTextField();
-    JTextField firstField = new JTextField("Press start...");
-    JTextField secondField = new JTextField("To start");
-    MyOval ovals[] = new MyOval[20];
+    JTextField firstField = new JTextField("Press ...");
+    JTextField secondField = new JTextField("To begin.");
+    MyOval ovals[] = new MyOval[grid.getColumns()*grid.getRows()];
     LoopThread loop;
     TextThread changeText;
 
     public MyFrame(){
         panel.setLayout(grid);
         panel.setSize(600,600);
+        runButton.setText("START");
         
         for(int i = 0; i < ovals.length; i++){
             this.ovals[i] = new MyOval(tickOffset);
