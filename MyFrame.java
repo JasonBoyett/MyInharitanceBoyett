@@ -6,26 +6,26 @@ import javax.swing.JTextField;
 
 import ovalButton.OvalButton;
 
-public class MyFrame extends JFrame{
-    
+public class MyFrame extends JFrame {
+
     JPanel panel = new JPanel();
-    GridLayout grid = new GridLayout(5,4);
+    GridLayout grid = new GridLayout(5, 4);
     JButton runButton = new OvalButton();
     int tickOffset = 10;
     JTextField spacer = new JTextField();
     JTextField spacer2 = new JTextField();
     JTextField firstField = new JTextField("Press ...");
     JTextField secondField = new JTextField("To begin.");
-    MyOval ovals[] = new MyOval[grid.getColumns()*grid.getRows()];
+    MyOval ovals[] = new MyOval[grid.getColumns() * grid.getRows()];
     LoopThread loop;
     TextThread changeText;
 
-    public MyFrame(){
+    public MyFrame() {
         panel.setLayout(grid);
-        panel.setSize(600,600);
+        panel.setSize(600, 600);
         runButton.setText("START");
-        
-        for(int i = 0; i < ovals.length; i++){
+
+        for (int i = 0; i < ovals.length; i++) {
             this.ovals[i] = new MyOval(tickOffset);
             panel.add(this.ovals[i]);
         }
@@ -53,36 +53,33 @@ public class MyFrame extends JFrame{
         spacer2.setBorder(null);
         panel.add(spacer2);
         this.add(panel);
-        this.setSize(600,600);
+        this.setSize(600, 600);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-    } 
-    
-    private void pressStartStop(){
+    }
+
+    private void pressStartStop() {
         try {
-            if(this.runButton.getText() == "START"){
-                this.loop = new LoopThread(ovals,tickOffset);
-                this.changeText = new TextThread(firstField,secondField,runButton);
+            if (this.runButton.getText() == "START") {
+                this.loop = new LoopThread(ovals, tickOffset);
+                this.changeText = new TextThread(firstField, secondField, runButton);
                 this.changeText.setPriority(Thread.MAX_PRIORITY);
                 this.changeText.start();
                 this.loop.setDaemon(true);
                 this.loop.setPriority(Thread.MIN_PRIORITY);
                 this.loop.start();
                 this.loop.notifyAll();
-            }
-            else if(this.runButton.getText().equals("STOP")){
+            } else if (this.runButton.getText().equals("STOP")) {
                 this.loop.interrupt();
-                this.loop = new LoopThread(ovals,tickOffset);
                 this.changeText = new TextThread(firstField, secondField, runButton);
                 this.changeText.start();
                 this.changeText.join();
                 this.loop.join();
-                
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-    }
 
+    }
 
 }

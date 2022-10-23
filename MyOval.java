@@ -2,19 +2,16 @@ import ovalButton.*;
 
 import java.awt.Color;
 import java.lang.Math;
+
+import javax.swing.BorderFactory;
+
 public class MyOval extends OvalButton {
     private int tickRate;
-    private int tickOffset;
-    private boolean running;
+
     public MyOval(int tickOffset) {
-        super(OvalButton.SHAPE_OVAL, OvalButton.HORIZONTAL,Color.GREEN,Color.RED,Color.BLACK,Color.BLACK);
+        super(OvalButton.SHAPE_OVAL, OvalButton.HORIZONTAL, Color.GREEN, Color.RED, Color.BLACK, Color.BLACK);
         this.tickRate = (int) (Math.random() * 20);
-        this.tickOffset = tickOffset;
-        this.running = false;
         this.repaint();
-    }
-    public int getTickRate() {
-        return this.tickRate;
     }
 
     public void changeColor() {
@@ -31,5 +28,8 @@ public class MyOval extends OvalButton {
         }
     }
 
-}
+    public int getTickRate() {
+        return this.tickRate;
+    }
 
+}
