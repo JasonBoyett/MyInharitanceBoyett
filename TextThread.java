@@ -1,27 +1,31 @@
+/*
+* Jason Boyett - jaboye2448
+* CIT 4423 01
+* October 23, 2022
+* mac OS
+*/
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
 public class TextThread extends Thread {
-    JTextField firstField;
-    JTextField secondField;
+    JTextField textField;
     JButton runButton;
 
-    public TextThread(JTextField firstField, JTextField secondField, JButton runButton) {
-        this.firstField = firstField;
-        this.secondField = secondField;
-        this.runButton = runButton;
+    public TextThread(MyFrame frame) {//constructor for thread
+        this.textField = frame.secondField;
+        this.runButton = frame.runButton;
     }
 
     @Override
     public void run() {
-        if (this.runButton.getText().equalsIgnoreCase("start")) {
+        if (this.runButton.getText().equalsIgnoreCase("start")) {//the text of the run button is "start" while the loop i not running
+        //if this condition is triggered the GUI text is set to the appropriate state
             this.runButton.setText("STOP");
-            this.firstField.setText("Press ...");
-            this.secondField.setText("to end.");
-        } else if (this.runButton.getText().equalsIgnoreCase("stop")) {
+            this.textField.setText("to pause");
+        } else if (this.runButton.getText().equalsIgnoreCase("stop")) {//the text of the run button will be stop while the loop is running
+            //if this condition is meant the GUI text is set to the appropriate state
             this.runButton.setText("START");
-            this.firstField.setText("Press ...");
-            this.secondField.setText("to continue.");
+            this.textField.setText("to continue.");
         }
     }
 
