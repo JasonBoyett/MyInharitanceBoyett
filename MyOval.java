@@ -24,7 +24,7 @@ public class MyOval extends OvalButton {
                 this.paint(getGraphics());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+           System.out.println(e.getMessage());
         }
     }
 

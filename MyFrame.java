@@ -23,29 +23,33 @@ public class MyFrame extends JFrame {
     public MyFrame() {
         panel.setLayout(grid);
         panel.setSize(600, 600);
-        runButton.setText("START");
-
+        //this for loop creates several Oval buttons and adds them to an array
+        //it then add them to the panel which places them using a grid layout manager
         for (int i = 0; i < ovals.length; i++) {
             this.ovals[i] = new MyOval(tickOffset);
             panel.add(this.ovals[i]);
         }
 
+        spacer.setEditable(false);
+        spacer.setBorder(null);
+        spacer.setOpaque(false);
         this.panel.add(spacer);
-        panel.add(firstField);
+
         firstField.setHorizontalAlignment(JTextField.CENTER);
         firstField.setEditable(false);
         firstField.setBorder(null);
         firstField.setOpaque(false);
+        panel.add(firstField);
+        
+        runButton.setText("START");//this button starts and stops the sim
         runButton.addActionListener(e -> pressStartStop());
         panel.add(runButton);
-        panel.add(secondField);
+
         secondField.setHorizontalAlignment(JTextField.CENTER);
         secondField.setEditable(false);
         secondField.setBorder(null);
         secondField.setOpaque(false);
-        spacer.setEditable(false);
-        spacer.setBorder(null);
-        spacer.setOpaque(false);
+        panel.add(secondField);
         spacer.setHorizontalAlignment(JTextField.CENTER);
         spacer2.setHorizontalAlignment(JTextField.CENTER);
         spacer2.setEditable(false);
@@ -55,6 +59,7 @@ public class MyFrame extends JFrame {
         this.add(panel);
         this.setSize(600, 600);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
 
     private void pressStartStop() {
@@ -77,7 +82,7 @@ public class MyFrame extends JFrame {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }

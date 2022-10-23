@@ -22,6 +22,7 @@ public class LoopThread extends Thread {
             }
 
         } catch (InterruptedException e) {
+            System.out.println("Interrupted");
             new LoopThread(ovals, tickOffset);
         }
     }
