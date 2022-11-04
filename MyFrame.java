@@ -4,8 +4,10 @@
 * October 23, 2022
 * mac OS
 */
+import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -15,16 +17,16 @@ import ovalButton.OvalButton;
 public class MyFrame extends JFrame {
 
     JPanel panel = new JPanel();
-    GridLayout grid = new GridLayout(5, 4);//makes all gui elements appear in a grid
+    GridLayout grid = new GridLayout(6, 4, 10,10);//makes all gui elements appear in a grid
     JButton runButton = new OvalButton();
     double tickOffset = 15;//this is the multiplier for the individual buttons tick rate. Do not set below 10
     //program will still run if tickOffset is set below 10 but the buttons will change so fast it will look pretty bad
     //setting tickOffset below 0 will cause the loop thread to reset it to 10 to prevent runtime errors
-    JTextField spacer = new JTextField();
-    JTextField spacer2 = new JTextField();
+    JButton colorChangerPrimary = new JButton("primary color");
+    JButton colorChangerSecondary = new JButton("secondary color");
     JTextField firstField = new JTextField("Press ...");
     JTextField secondField = new JTextField("To begin.");
-    MyOval[] ovals = new MyOval[grid.getColumns() * grid.getRows()];
+    MyOval[] ovals = new MyOval[(grid.getColumns() * grid.getRows())+1];
     LoopThread loop;
     TextThread changeText;
 
@@ -33,16 +35,10 @@ public class MyFrame extends JFrame {
         panel.setSize(600, 600);
         //this for loop creates several Oval buttons and adds them to an array
         //it then add them to the panel which places them using a grid layout manager
-        for (int i = 0; i < ovals.length; i++) {
-            this.ovals[i] = new MyOval();
-            panel.add(this.ovals[i]);
-        }
+        
 
         //this JTextField acts as an empty space to help align the GUI elements in the Grid layout
-        spacer.setEditable(false);
-        spacer.setBorder(null);
-        spacer.setOpaque(false);
-        this.panel.add(spacer);
+        this.panel.add(colorChangerPrimary);
 
         //a text field telling the user to pres the runButton
         firstField.setHorizontalAlignment(JTextField.CENTER);
@@ -64,10 +60,18 @@ public class MyFrame extends JFrame {
         panel.add(secondField);
 
         //a spacer at the end of the grid
-        spacer2.setEditable(false);
-        spacer2.setOpaque(false);
-        spacer2.setBorder(null);
-        panel.add(spacer2);
+        panel.add(colorChangerSecondary);
+
+        
+        for (int i = 0; i < ovals.length; i++) {
+            this.ovals[i] = new MyOval();
+            panel.add(this.ovals[i]);
+        }
+        
+        //this block sets up the characteristics of the buttons that change the primary
+        //and secondary colors
+        colorChangerSecondary.addActionListener(e -> setSecondary());
+        colorChangerPrimary.addActionListener(e -> setPrimary());
 
         this.add(panel);
         this.setSize(600, 600);
@@ -95,6 +99,28 @@ public class MyFrame extends JFrame {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    private void setPrimary(){
+        Color color = JColorChooser.showDialog(this, "Primary", ovals[0].getPrimary());
+        if(color != null){
+            for( MyOval oval: this.ovals){
+                oval.setPrimary(color);
+                oval.setColorNormal(color);
+                this.repaint();
+            }
+        }
+    }
+
+    private void setSecondary(){
+        Color color = JColorChooser.showDialog(this, "Primary", ovals[0].getSecondary());
+        if(color != null){
+            for( MyOval oval: this.ovals){
+                oval.setSecondary(color);
+                oval.setColorHighlighted(color);
+                this.repaint();
+            }
+        }
     }
 
 }
