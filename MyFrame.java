@@ -12,14 +12,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ovalButton.OvalButton;
-
 public class MyFrame extends JFrame {
 
     JPanel panel = new JPanel();
     GridLayout grid = new GridLayout(6, 4, 10,10);//makes all gui elements appear in a grid
     JButton runButton = new OvalButton();
-    double tickOffset = 15;//this is the multiplier for the individual buttons tick rate. Do not set below 10
+    double tickOffset = 10;//this is the multiplier for the individual buttons tick rate. Do not set below 10
     //program will still run if tickOffset is set below 10 but the buttons will change so fast it will look pretty bad
     //setting tickOffset below 0 will cause the loop thread to reset it to 10 to prevent runtime errors
     JButton colorChangerPrimary = new JButton("primary color");

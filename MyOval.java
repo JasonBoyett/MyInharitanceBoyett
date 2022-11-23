@@ -4,7 +4,7 @@
 * October 23, 2022
 * mac OS
 */
-import ovalButton.*;//a repo from github that creates oval shaped JButtons
+//import ovalButton.*;//a repo from github that creates oval shaped JButtons
 import java.awt.Color;
 
 public class MyOval extends OvalButton {
